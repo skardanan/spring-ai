@@ -1,21 +1,17 @@
 package nl.gerimedica.service;
 
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OpenAIService {
+    private final ChatClient chatClient;
 
-    private final ChatModel chatModel;
-
-    public OpenAIService(ChatModel chatModel) {
-        this.chatModel = chatModel;
+    public OpenAIService(ChatClient chatClient) {
+        this.chatClient = chatClient;
     }
 
     public String ask(String message) {
-        ChatResponse response = chatModel.call(new Prompt(message));
-        return response.getResult().getOutput().getText();
+        return chatClient.prompt().user(message).call().content();
     }
 }
