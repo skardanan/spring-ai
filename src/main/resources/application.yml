@@ -1,0 +1,10 @@
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      base-url: https://api.openai.com/v1
+      model: gpt-5-nano
+    chat:
+      options:
+        model: gpt-5-nano
+        temperature: 1.0

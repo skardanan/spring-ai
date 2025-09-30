@@ -1,0 +1,43 @@
+plugins {
+        id 'java'
+        id 'org.springframework.boot' version '3.3.0'
+        id 'io.spring.dependency-management' version '1.1.4'
+    }
+
+    group = 'nl.gerimedica'
+    version = '1.0-SNAPSHOT'
+
+    ext {
+        springAiVersion = '1.0.2'
+        junitBomVersion = '5.10.0'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    dependencies {
+        implementation platform("org.springframework.ai:spring-ai-bom:${springAiVersion}")
+        implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-json'
+        implementation 'org.springframework:spring-webflux'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+        implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+        testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
