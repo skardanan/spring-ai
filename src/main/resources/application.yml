@@ -2,8 +2,8 @@ spring:
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
-      base-url: https://api.openai.com
+      base-url: https://api.openai.com/v1
       chat:
         options:
-          model: gpt-5-nano
+          model: gpt-3.5-turbo
           temperature: 1.0
