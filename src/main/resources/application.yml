@@ -7,3 +7,14 @@ spring:
         options:
           model: gpt-3.5-turbo
           temperature: 1.0
+      embedding:
+        options:
+          model: text-embedding-ada-002
+    vectorstore:
+      qdrant:
+        host: localhost
+        port: 6334                   # gRPC port used by the Spring AI Qdrant store
+        api-key: ""                  # set if using Qdrant Cloud or API key
+        collection-name: docs        # collection where embeddings will be stored
+        use-tls: false
+        initialize-schema: true
