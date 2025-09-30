@@ -1,7 +1,7 @@
-package controller;
+package nl.gerimedica.controller;
 
 import org.springframework.web.bind.annotation.*;
-import service.OpenAIService;
+import nl.gerimedica.service.OpenAIService;
 
 @RestController
 @RequestMapping("/api/chat")

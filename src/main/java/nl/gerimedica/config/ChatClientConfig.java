@@ -1,4 +1,4 @@
-package config;
+package nl.gerimedica.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.openai.OpenAiChatModel;
