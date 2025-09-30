@@ -35,6 +35,7 @@ plugins {
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
         implementation 'org.springframework.ai:spring-ai-starter-vector-store-qdrant'
+        implementation 'org.springframework.ai:spring-ai-advisors-vector-store'
 
         testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
         testImplementation 'org.junit.jupiter:junit-jupiter'

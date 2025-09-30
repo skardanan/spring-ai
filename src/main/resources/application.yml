@@ -2,7 +2,7 @@ spring:
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
-      base-url: https://api.openai.com/v1
+      base-url: https://api.openai.com/
       chat:
         options:
           model: gpt-3.5-turbo
@@ -14,7 +14,6 @@ spring:
       qdrant:
         host: localhost
         port: 6334                   # gRPC port used by the Spring AI Qdrant store
-        api-key: ""                  # set if using Qdrant Cloud or API key
         collection-name: docs        # collection where embeddings will be stored
         use-tls: false
         initialize-schema: true
