@@ -1,0 +1,173 @@
+.dashboard-content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Stats Grid
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.blue {
+    background: #eff6ff;
+    color: #2563eb;
+  }
+
+  &.green {
+    background: #ecfdf5;
+    color: #10b981;
+  }
+
+  &.purple {
+    background: #f5f3ff;
+    color: #8b5cf6;
+  }
+}
+
+// Upload Section
+.upload-card {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.upload-title {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.upload-zone {
+  border: 2px dashed #d1d5db;
+  border-radius: 0.75rem;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #9ca3af;
+    background: #f9fafb;
+  }
+
+  &.dragging {
+    border-color: #2563eb;
+    background: #eff6ff;
+  }
+}
+
+.upload-icon {
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.upload-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: #374151;
+}
+
+.upload-hint {
+  margin: 0.5rem 0 1.5rem 0;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.browse-btn {
+  padding: 0.75rem 1.5rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #1d4ed8;
+  }
+}
+
+.upload-status {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fef3c7;
+  border-radius: 0.5rem;
+  color: #92400e;
+  font-size: 0.875rem;
+}
+
+.uploaded-list {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f0fdf4;
+  border-radius: 0.5rem;
+
+  h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    color: #166534;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #15803d;
+    font-size: 0.875rem;
+  }
+
+  li {
+    margin-bottom: 0.25rem;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

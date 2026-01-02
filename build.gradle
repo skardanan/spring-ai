@@ -2,13 +2,14 @@ plugins {
         id 'java'
         id 'org.springframework.boot' version '3.3.0'
         id 'io.spring.dependency-management' version '1.1.4'
+        id 'com.github.node-gradle.node' version '7.0.1'
     }
 
     group = 'nl.gerimedica'
     version = '1.0-SNAPSHOT'
 
     ext {
-        springAiVersion = '1.0.2'
+        springAiVersion = '1.0.0'
         junitBomVersion = '5.10.0'
     }
 
@@ -25,7 +26,7 @@ plugins {
 
     dependencies {
         implementation platform("org.springframework.ai:spring-ai-bom:${springAiVersion}")
-        implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+        implementation 'org.springframework.ai:spring-ai-openai'
 
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-json'
@@ -34,13 +35,51 @@ plugins {
 
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
-        implementation 'org.springframework.ai:spring-ai-starter-vector-store-qdrant'
-        implementation 'org.springframework.ai:spring-ai-advisors-vector-store'
+        implementation 'org.springframework.ai:spring-ai-qdrant-store'
+
+        // Lombok for reducing boilerplate code
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
 
         testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
         testImplementation 'org.junit.jupiter:junit-jupiter'
+
+        // Lombok for tests
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
     }
 
     test {
         useJUnitPlatform()
     }
+
+    // Node/NPM configuration for Angular frontend
+    node {
+        version = '20.11.1'
+        npmVersion = '10.2.4'
+        download = true
+        nodeProjectDir = file("${projectDir}/src/main/frontend")
+    }
+
+    // Install npm dependencies
+    task npmInstallFrontend(type: NpmTask) {
+        workingDir = file("${projectDir}/src/main/frontend")
+        args = ['install']
+    }
+
+    // Build Angular application
+    task buildFrontend(type: NpmTask) {
+        dependsOn npmInstallFrontend
+        workingDir = file("${projectDir}/src/main/frontend")
+        args = ['run', 'build']
+    }
+
+    // Copy Angular build output to Spring Boot static resources
+    task copyFrontend(type: Copy) {
+        dependsOn buildFrontend
+        from "${projectDir}/src/main/frontend/dist/frontend/browser"
+        into "${projectDir}/src/main/resources/static"
+    }
+
+    // Hook frontend build into processResources
+    processResources.dependsOn copyFrontend
