@@ -9,7 +9,7 @@ plugins {
     version = '1.0-SNAPSHOT'
 
     ext {
-        springAiVersion = '1.0.0'
+        springAiVersion = '1.1.2'
         junitBomVersion = '5.10.0'
     }
 
@@ -26,7 +26,8 @@ plugins {
 
     dependencies {
         implementation platform("org.springframework.ai:spring-ai-bom:${springAiVersion}")
-        implementation 'org.springframework.ai:spring-ai-openai'
+        implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+        implementation 'org.springframework.ai:spring-ai-starter-vector-store-qdrant'
 
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-json'
@@ -34,8 +35,6 @@ plugins {
         implementation 'org.springframework.boot:spring-boot-starter-validation'
 
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-
-        implementation 'org.springframework.ai:spring-ai-qdrant-store'
 
         // Lombok for reducing boilerplate code
         compileOnly 'org.projectlombok:lombok'
