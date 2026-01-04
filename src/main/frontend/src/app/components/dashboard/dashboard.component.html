@@ -62,6 +62,7 @@
         #fileInput
         type="file"
         multiple
+        accept=".pdf,.doc,.docx,.txt,.rtf,.md,.csv,.json,.xml,.html,.htm,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp"
         (change)="onFileSelect($event)"
         style="display: none"
       />
@@ -75,12 +76,18 @@
       </div>
 
       <p class="upload-text">Drag and drop your files here, or click to browse</p>
-      <p class="upload-hint">Supports all file types</p>
+      <p class="upload-hint">Supports PDF, Word, Excel, PowerPoint, TXT, Markdown, CSV, JSON, XML, HTML</p>
 
       <button class="browse-btn" (click)="$event.stopPropagation(); fileInput.click()">
         Browse Files
       </button>
     </div>
+
+    @if (uploadError) {
+      <div class="upload-error">
+        <span>{{ uploadError }}</span>
+      </div>
+    }
 
     @if (isUploading) {
       <div class="upload-status">
@@ -94,6 +101,61 @@
         <ul>
           @for (file of uploadedFiles; track file) {
             <li>{{ file }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+
+  <!-- URL Crawl Section -->
+  <div class="upload-card">
+    <h3 class="upload-title">Crawl Website</h3>
+
+    <div class="url-input-section">
+      <div class="url-input-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="url-icon">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <input
+          type="url"
+          [(ngModel)]="crawlUrl"
+          placeholder="Enter website URL (e.g., https://example.com)"
+          class="url-input"
+          (keyup.enter)="onCrawlUrl()"
+        />
+      </div>
+
+      <button class="crawl-btn" (click)="onCrawlUrl()" [disabled]="isCrawling || !crawlUrl">
+        @if (isCrawling) {
+          <span>Crawling...</span>
+        } @else {
+          <span>Crawl & Index</span>
+        }
+      </button>
+    </div>
+
+    <p class="upload-hint">Enter a URL to crawl the website content and add it to the knowledge base</p>
+
+    @if (crawlError) {
+      <div class="upload-error">
+        <span>{{ crawlError }}</span>
+      </div>
+    }
+
+    @if (crawlSuccess) {
+      <div class="crawl-success">
+        <span>{{ crawlSuccess }}</span>
+      </div>
+    }
+
+    @if (crawledUrls.length > 0) {
+      <div class="uploaded-list">
+        <h4>Crawled Websites:</h4>
+        <ul>
+          @for (url of crawledUrls; track url) {
+            <li>{{ url }}</li>
           }
         </ul>
       </div>
